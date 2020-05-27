@@ -1,28 +1,27 @@
-<!-- <form [formGroup]="form"> -->
-	<mat-card>
-		<mat-card-title>{{ operacao }}</mat-card-title>
-		<mat-form-field>
-			<input matInput placeholder="Id" readonly >
+<form [formGroup]="form">
+  <mat-card>
+    <mat-card-title>{{ operacao }}</mat-card-title>
+    <mat-form-field>
+      <input matInput placeholder="Id" formControlName="id" readonly />
     </mat-form-field>
-			<mat-form-field>
-				<input matInput placeholder="Nome" name="name" >
+    <mat-form-field>
+      <input matInput placeholder="Nome" formControlName="nome" />
     </mat-form-field>
-				<mat-form-field>
-					<input matInput placeholder="Descricao" name="description" >
+    <mat-form-field>
+      <input matInput placeholder="Descrição" formControlName="descricao" />
     </mat-form-field>
-					<mat-form-field>
-						<input matInput placeholder="Preço (R$)" name="price" >
+    <mat-form-field>
+      <input matInput placeholder="Quantidade" formControlName="quantidade" />
     </mat-form-field>
-						<!-- <mat-slide-toggle class="example-margin" [color]="color" [checked]="product.available" formControlName="available">
-						Disponível ?
-		</mat-slide-toggle> -->
+    <mat-form-field>
+      <input matInput placeholder="Preço (R$)" formControlName="preco" />
+    </mat-form-field>
 
-						<button mat-raised-button (click)="save()" color="primary">
-        Salvar
+    <button mat-raised-button (click)="save()" color="primary">
+      Salvar
     </button>
-
-						<button mat-raised-button (click)="cancel()">
-        Cancelar
+    <button mat-raised-button (click)="cancel()">
+      Cancelar
     </button>
-	</mat-card>
-<!-- </form> -->
+  </mat-card>
+</form>

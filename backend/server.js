@@ -1,6 +1,15 @@
 // Create express app
 var express = require("express")
+var cors = require('cors')
 var app = express()
+
+app.use(cors())
+var corsOptions = {
+    origin: 'http://localhost:7000',
+    optionsSuccessStatus: 200
+  }
+
+app.use(cors(corsOptions))
 
 // Default response for any other request
 app.use(function(req, res, next) {
@@ -79,7 +88,7 @@ app.post("/api/produtos/", (req, res, next) => {
     if (!req.body.preco){
         errors.push("Preço não informado");
     }
-
+    
     if (errors.length){
         res.status(400).json({"error":errors.join(",")});
         return;
@@ -90,8 +99,9 @@ app.post("/api/produtos/", (req, res, next) => {
         quantidade: req.body.quantidade,
         preco: req.body.preco
     }
-    var sql ='INSERT INTO produto (nome, descricao, quantidade, preco) VALUES (?,?,?,?)'
-    var params =[data.nome, data.descricao, data.quantidade, data.preco]
+
+    var sql    = 'INSERT INTO produto (nome, descricao, quantidade, preco) VALUES (?,?,?,?)';
+    var params = [data.nome, data.descricao, data.quantidade, data.preco];
     db.run(sql, params, function (err, result) {
         if (err){
             res.status(400).json({"error": err.message})
@@ -105,6 +115,7 @@ app.post("/api/produtos/", (req, res, next) => {
     });
 });
 
+// alterar
 app.patch("/api/produtos/:id", (req, res, next) => {
     var data = {
         nome: req.body.nome,
@@ -119,7 +130,7 @@ app.patch("/api/produtos/:id", (req, res, next) => {
            quantidade = COALESCE(?,quantidade),
            preco = COALESCE(?,preco)
            WHERE id = ?`,
-        [data.name, data.email, data.password, req.params.id],
+        [data.nome, data.descricao, data.quantidade, data.preco, req.params.id],
         function (err, result) {
             if (err){
                 res.status(400).json({"error": res.message})
@@ -136,7 +147,7 @@ app.patch("/api/produtos/:id", (req, res, next) => {
 
 app.delete("/api/produtos/:id", (req, res, next) => {
     db.run(
-        'DELETE FROM produtos WHERE id = ?',
+        'DELETE FROM produto WHERE id = ?',
         req.params.id,
         function (err, result) {
             if (err){

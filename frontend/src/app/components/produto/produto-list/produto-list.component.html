@@ -1,7 +1,17 @@
 <div layout-gt-sm="row" tdMediaToggle="gt-sm">
 	<div flex-gt-sm="100">
 		<mat-card>
-			<mat-card-title>Consulta de Produtos</mat-card-title>
+			<mat-card-title>
+
+        <mat-toolbar color="">
+          <button mat-raised-button color="link" (click)="navigateToProdutoCreate()"><mat-icon>add_box</mat-icon>Novo</button>
+          <button mat-raised-button color="link" (click)="navigateToProdutoCreate()"><mat-icon>picture_as_pdf</mat-icon>Exportar PDF</button>
+          <button mat-raised-button color="link" (click)="navigateToProdutoCreate()"><mat-icon>picture_as_pdf</mat-icon>Exportar CSV</button>
+          <button mat-raised-button color="link" (click)="navigateToProdutoCreate()"><mat-icon>print_box</mat-icon>Imprimir</button>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+
+      </mat-card-title>
 			<mat-divider></mat-divider>
 			<mat-card-content>
 				<div class="mat-elevation-z8">
@@ -50,24 +60,6 @@
                   <button mat-raised-button color="warn" (click)="delete(row.id)"> <mat-icon aria-label="Delete">delete</mat-icon></button>
                 </td>
 							</ng-container>
-
-
-      <!-- Action Column -->
-      <!-- <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef>Ações</th>
-        <td mat-cell *matCellDef="let row">
-            <a routerLink="/products/update/{{ row.id }}" class="edit">
-                <i class="material-icons">
-                    edit
-                </i>
-            </a>
-            <a routerLink="/products/delete/{{ row.id }}" class="delete">
-                <i class="material-icons">
-                    delete
-                </i>
-            </a>
-        </td>
-      </ng-container> -->
 
 							<tr mat-header-row *matHeaderRowDef="colunas"></tr>
 							<tr mat-row *matRowDef="let row; columns: colunas;">

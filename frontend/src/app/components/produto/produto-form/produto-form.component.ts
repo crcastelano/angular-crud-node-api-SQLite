@@ -32,84 +32,71 @@ export class ProdutoFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder
-  ) { }
+  ) {
+    this.form = this.formBuilder.group({
+      id: [0],
+      nome: [null],
+      descricao: [null],
+      quantidade: [null],
+      preco: [null]
+    });
+  }
 
   ngOnInit(): void {
-    // this.form = this.formBuilder.group({
-    //     id: ['', ],
-    //     name: ['', Validators.required],
-    //     description: ['', []],
-    //     price: ['', []],
-    //     available: ['', []]
-    // }
-    // );
-
-    // this.form = new FormGroup({
-    //   id: new FormControl("", [Validators.required, Validators.maxLength(60)]),
-    //   name: new FormControl(new Date()),
-    //   description: new FormControl("", [
-    //     Validators.required,
-    //     Validators.maxLength(100)
-    //   ]),
-    //   price: new FormControl("", []),
-    //   available: new FormControl("", [])
-    // });
-
     this.key = this.route.snapshot.paramMap.get("id");
 
     if (this.key !== null) {
       this.operacao = "Alteração";
-      this.produtoService.get(this.key).subscribe(data => {
-        this.produto = {
-          id: data.id,
-          nome: data.nome,
-          descricao: data.descricao,
-          quantidade: data.quantidade,
-          preco: data.preco,
-        };
+
+      this.produtoService.get(this.key).subscribe((data: any) => {
+        const produto = data;
+
+        this.form = this.formBuilder.group({
+          id: [produto.data.id],
+          nome: [produto.data.nome, Validators.required],
+          descricao: [produto.data.descricao],
+          quantidade: [produto.data.quantidade],
+          preco: [produto.data.preco]
+        }
+        );
       });
     }
   }
 
-  // createProduct(): void {
-  //   this.produtoService.create(this.product).subscribe(() => {
-  //     this.produtoService.showMessage("Produto criado com sucesso !!!");
-  //     this.router.navigate(["/products"]);
-  //   });
-  // }
-
   save() {
     const data = {
-      nome: this.produto.nome,
-      descricao: this.produto.descricao,
-      quantidade: this.produto.quantidade,
-      preco: this.produto.preco
+      nome: this.form.get('nome').value,
+      descricao: this.form.get('descricao').value,
+      quantidade: this.form.get('quantidade').value,
+      preco: this.form.get('preco').value,
     };
 
-    if (this.key !== null) {
-      this.produtoService.update(this.produto.id, data)
+    const id = this.form.get('id').value;
+
+    if (id != 0) {
+      this.produtoService.update(id, data)
         .subscribe(
           response => {
             this.produtoService.showMessage("Produto atualizado com sucesso !!!");
-            this.router.navigate(["/products"]);
+            this.router.navigate(["/produtos"]);
           },
           error => {
-            this.produtoService.showMessage("Erro na alteração do produto !");
+            this.produtoService.showMessage("Erro na alteração do produto !" + error.error.error);
           });
     } else {
       this.produtoService.create(data)
         .subscribe(
           response => {
             this.produtoService.showMessage("Produto cadastrado com sucesso !!!");
-            this.router.navigate(["/products"]);
+            this.router.navigate(["/produtos"]);
           },
           error => {
-            this.produtoService.showMessage("Erro na alteração do produto !");
+            this.produtoService.showMessage("Erro na inclusão do produto !" + error.error.error);
           });
     }
   }
 
   cancel(): void {
-    this.router.navigate(["/products"]);
+    this.router.navigate(["/produtos"]);
   }
 }

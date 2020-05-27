@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { Produto } from "./produto.model";
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Observable, EMPTY } from "rxjs";
 
 const baseUrl = 'http://localhost:7000/api/produtos';
 
@@ -18,7 +17,7 @@ export class ProdutoService {
   }
 
   get(id) {
-    return this.http.get<Produto>(`${baseUrl}/${id}`);
+    return this.http.get(`${baseUrl}/${id}`);
   }
 
   create(data) {
@@ -26,7 +25,7 @@ export class ProdutoService {
   }
 
   update(id, data) {
-    return this.http.put(`${baseUrl}/${id}`, data);
+    return this.http.patch(`${baseUrl}/${id}`, data);
   }
 
   delete(id) {

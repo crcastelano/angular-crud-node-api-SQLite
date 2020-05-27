@@ -2,6 +2,11 @@
   width: 100%;
 }
 
+.mat-raised-button {
+  margin-right: 2em;
+  width: 10em;
+}
+
 .mat-form-field {
   font-size: 14px;
   width: 100%;
