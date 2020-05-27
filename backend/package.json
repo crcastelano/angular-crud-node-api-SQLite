@@ -1,0 +1,33 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Node Express REST API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crcastelano/angular-crud-node-api-SQLite.git"
+  },
+  "keywords": [
+    "Node",
+    "Express",
+    "Rest",
+    "API",
+    "Angular",
+    "SQLite"
+  ],
+  "author": "Me",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crcastelano/angular-crud-node-api-SQLite/issues"
+  },
+  "homepage": "https://github.com/crcastelano/angular-crud-node-api-SQLite#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "md5": "^2.2.1",
+    "sqlite3": "^4.2.0"
+  }
+}

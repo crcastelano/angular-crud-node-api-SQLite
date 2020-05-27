@@ -1,0 +1,28 @@
+<!-- <form [formGroup]="form"> -->
+	<mat-card>
+		<mat-card-title>{{ operacao }}</mat-card-title>
+		<mat-form-field>
+			<input matInput placeholder="Id" readonly >
+    </mat-form-field>
+			<mat-form-field>
+				<input matInput placeholder="Nome" name="name" >
+    </mat-form-field>
+				<mat-form-field>
+					<input matInput placeholder="Descricao" name="description" >
+    </mat-form-field>
+					<mat-form-field>
+						<input matInput placeholder="Preço (R$)" name="price" >
+    </mat-form-field>
+						<!-- <mat-slide-toggle class="example-margin" [color]="color" [checked]="product.available" formControlName="available">
+						Disponível ?
+		</mat-slide-toggle> -->
+
+						<button mat-raised-button (click)="save()" color="primary">
+        Salvar
+    </button>
+
+						<button mat-raised-button (click)="cancel()">
+        Cancelar
+    </button>
+	</mat-card>
+<!-- </form> -->
